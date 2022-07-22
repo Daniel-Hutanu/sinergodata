@@ -1,0 +1,95 @@
+$bg-color: #105455;
+$black-bg: #151a1d;
+$white: #fff;
+$light-green: #25d366;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  background-color: $bg-color;
+}
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.container {
+  width: 100%;
+  max-width: 1400px;
+}
+header {
+  height: 100px;
+  width: 100%;
+  background: var($bg-color);
+}
+.main-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  .logo-text {
+    font-size: 40px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .sub-logo {
+    font-size: 1rem;
+    color: rgba($color: #fff, $alpha: 0.5);
+    margin-left: 50px;
+    margin-top: -5px;
+  }
+}
+.menu-btn {
+  $offset1: 2px;
+  $offset2: -2px;
+
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg-color;
+  }
+  &::before {
+    left: $offset1;
+    text-shadow: -1px 0 $light-green;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: noise-anim 2.5s infinite linear alternate;
+  }
+  &::after {
+    left: $offset2;
+    text-shadow: 1px 0 $black-bg;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: noise-anim 2s infinite linear alternate;
+  }
+}
+
+@keyframes noise-anim {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(150) + px, 9999px, random(140) + px, 0);
+    }
+  }
+}
